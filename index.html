@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Collective - 项目经理社群</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1 class="logo">PM Collective</h1>
+                <p class="tagline">项目经理的知识社区</p>
+            </div>
+            <div class="header-stats">
+                <span class="member-count">👥 1,284 位项目经理已加入</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="content-wrapper">
+            <div class="left-section">
+                <section class="category-section">
+                    <div class="section-header">
+                        <h2 class="section-title">📋 Process</h2>
+                        <p class="section-desc">项目管理流程、方法论、阶段指南</p>
+                    </div>
+                    <div class="cards-container" id="process-cards">
+                    </div>
+                </section>
+
+                <section class="category-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🛠️ Tools</h2>
+                        <p class="section-desc">工具使用手册、模板、软件推荐</p>
+                    </div>
+                    <div class="cards-container" id="tools-cards">
+                    </div>
+                </section>
+
+                <section class="category-section">
+                    <div class="section-header">
+                        <h2 class="section-title">✅ Project Quality</h2>
+                        <p class="section-desc">质量保证、质量控制、持续改进</p>
+                    </div>
+                    <div class="cards-container" id="quality-cards">
+                    </div>
+                </section>
+
+                <section class="category-section">
+                    <div class="section-header">
+                        <h2 class="section-title">⚖️ Compliance</h2>
+                        <p class="section-desc">合规性要求、标准、法规、审计</p>
+                    </div>
+                    <div class="cards-container" id="compliance-cards">
+                    </div>
+                </section>
+            </div>
+
+            <aside class="right-section">
+                <div class="calendar-section">
+                    <h3 class="calendar-title">📅 2026 Calendar</h3>
+                    <div class="month-grid" id="month-grid">
+                    </div>
+                </div>
+
+                <div class="updates-section">
+                    <h3 class="updates-title">🔥 Latest Updates</h3>
+                    <div class="updates-list" id="updates-list">
+                    </div>
+                </div>
+
+                <div class="events-section">
+                    <h3 class="events-title">🎯 Upcoming Events</h3>
+                    <div class="events-list" id="events-list">
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
