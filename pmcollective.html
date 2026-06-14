@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTIT Project Manager Collective</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ====== Header ====== -->
+<header class="header">
+  <div class="header-logo">
+    <div class="logo-icon">◆</div>
+    <span>DTIT Project Manager Collective</span>
+  </div>
+  <div class="header-meta">
+    <div class="header-avatar" title="User Profile">U</div>
+    <span class="greeting">Hello, Project Manager</span>
+    <span class="member-count">🧑‍🤝‍🧑 1,284 Members</span>
+  </div>
+</header>
+
+<!-- ====== Main Content ====== -->
+<main class="main-container">
+
+  <!-- ====== Left: Tab Content ====== -->
+  <div class="left-panel">
+    <nav class="tab-nav" id="tabNav">
+      <button class="tab-btn process active" data-tab="process">
+        <span class="tab-icon">📋</span>
+        <span>Process</span>
+      </button>
+      <button class="tab-btn tools" data-tab="tools">
+        <span class="tab-icon">⚙️</span>
+        <span>Tools</span>
+      </button>
+      <button class="tab-btn quality" data-tab="quality">
+        <span class="tab-icon">📈</span>
+        <span>Project Quality</span>
+      </button>
+      <button class="tab-btn compliance" data-tab="compliance">
+        <span class="tab-icon">🛡️</span>
+        <span>Compliance</span>
+      </button>
+    </nav>
+
+    <div class="tab-content" id="tabContent">
+      <!-- Process -->
+      <div class="tab-panel active" id="panel-process">
+        <div class="tab-panel-header">
+          <span class="tab-icon">📋</span>
+          <div>
+            <div class="tab-panel-title">Process</div>
+            <div class="tab-panel-subtitle">Project management processes, methodologies, and phase guides</div>
+          </div>
+        </div>
+        <div class="doc-list" id="docs-process"></div>
+      </div>
+
+      <!-- Tools -->
+      <div class="tab-panel" id="panel-tools">
+        <div class="tab-panel-header">
+          <span class="tab-icon">⚙️</span>
+          <div>
+            <div class="tab-panel-title">Tools</div>
+            <div class="tab-panel-subtitle">Tool guides, templates, and software recommendations</div>
+          </div>
+        </div>
+        <div class="doc-list" id="docs-tools"></div>
+      </div>
+
+      <!-- Quality -->
+      <div class="tab-panel" id="panel-quality">
+        <div class="tab-panel-header">
+          <span class="tab-icon">📈</span>
+          <div>
+            <div class="tab-panel-title">Project Quality</div>
+            <div class="tab-panel-subtitle">Quality assurance, quality control, and continuous improvement</div>
+          </div>
+        </div>
+        <div class="doc-list" id="docs-quality"></div>
+      </div>
+
+      <!-- Compliance -->
+      <div class="tab-panel" id="panel-compliance">
+        <div class="tab-panel-header">
+          <span class="tab-icon">🛡️</span>
+          <div>
+            <div class="tab-panel-title">Compliance</div>
+            <div class="tab-panel-subtitle">Compliance requirements, standards, regulations, and audits</div>
+          </div>
+        </div>
+        <div class="doc-list" id="docs-compliance"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== Right: Calendar Panel ====== -->
+  <aside class="right-panel">
+    <!-- Year Calendar -->
+    <div class="calendar-card">
+      <div class="calendar-title">📅 2026 Calendar</div>
+      <div class="year-calendar" id="yearCalendar"></div>
+    </div>
+
+    <!-- Recent Updates -->
+    <div class="info-card">
+      <div class="info-card-header">
+        <span class="info-icon">📝</span> Recent Updates
+      </div>
+      <div id="latestUpdates"></div>
+    </div>
+
+    <!-- Upcoming Events -->
+    <div class="info-card">
+      <div class="info-card-header">
+        <span class="info-icon">🎯</span> Upcoming Events
+      </div>
+      <div id="upcomingEvents"></div>
+    </div>
+  </aside>
+
+</main>
+
+<!-- Modal Popup -->
+<div id="detailModal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle"></h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+      <button class="modal-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">PM Collective © 2026 — Transformation Office Central Project Management</footer>
+
+<script>
+/* ====== Document Data ====== */
+const documentData = {
+  process: [
+    { title: "Agile Development Process Guide", summary: "Covers practical workflows for Scrum, Kanban, and other agile frameworks to help teams deliver efficiently.", link: "#" },
+    { title: "Waterfall Model Checklist", summary: "Checklist and review standards for deliverables at each phase of traditional waterfall model.", link: "#" },
+    { title: "Change Control Process Template", summary: "Complete change request, evaluation, approval, and implementation process template including RACI matrix.", link: "#" },
+    { title: "SAFe 6.0 Implementation Guide", summary: "Core elements and implementation roadmap for the large-scale agile framework SAFe 6.0.", link: "#" },
+    { title: "Hybrid Lifecycle Best Practices", summary: "Combining agile and waterfall approaches for complex organizational environments.", link: "#" },
+    { title: "Project Closure Checklist", summary: "Key steps, deliverables, and lessons learned template for project closure phase.", link: "#" }
+  ],
+  tools: [
+    { title: "Jira Advanced Guide", summary: "Comprehensive guide to Jira advanced filtering, board configuration, automation rules, and report generation.", link: "#" },
+    { title: "Notion Project Management Template", summary: "Build full-featured project management boards and knowledge base using Notion databases.", link: "#" },
+    { title: "Monte Carlo Simulation Tool", summary: "Practical guide for project duration forecasting and risk assessment using Monte Carlo simulation.", link: "#" },
+    { title: "MS Project Scheduling Tips", summary: "WBS decomposition, resource leveling, and critical path analysis in Microsoft Project.", link: "#" },
+    { title: "Confluence Documentation Collaboration", summary: "Best practices for team knowledge management: space design, template standardization, and permission management.", link: "#" }
+  ],
+  quality: [
+    { title: "DMAIC Methodology Steps", summary: "Complete implementation framework for Six Sigma DMAIC (Define-Measure-Analyze-Improve-Control).", link: "#" },
+    { title: "Quality Audit Checklist", summary: "Key inspection items, scoring standards, and corrective action tracking mechanism for project quality audits.", link: "#" },
+    { title: "Defect Tracking Best Practices", summary: "Full lifecycle defect management: from discovery, classification, fixing to verification closure.", link: "#" },
+    { title: "Quality Gate Automation", summary: "Implement quality gate automation using CI/CD pipelines to boost delivery confidence.", link: "#" },
+    { title: "Test Strategy Design Guide", summary: "Strategy planning and resource allocation for unit, integration, system, and acceptance testing.", link: "#" }
+  ],
+  compliance: [
+    { title: "GDPR Project Compliance Essentials", summary: "Data protection requirements and compliance implementation guide for each phase of project management.", link: "#" },
+    { title: "ISO 21500 Interpretation", summary: "Core processes and implementation path for the international project management standard ISO 21500.", link: "#" },
+    { title: "Industry Security Standards Mapping", summary: "Mapping relationships between ISO 27001, SOC2 and other security standards with project management processes.", link: "#" },
+    { title: "EU Cyber Resilience Act Impact", summary: "Compliance impact analysis of EU Cyber Resilience Act on software project management.", link: "#" }
+  ]
+};
+
+/* ====== Calendar Data (2026) ====== */
+const calendarData = {
+  1: {
+    latestUpdates: [
+      { date: "2026-01-10", title: "Salary Report", desc: "2026 PM Industry Salary Benchmark Report released", module: "process" },
+      { date: "2026-01-18", title: "Assessment Template Added", desc: "Risk Probability-Impact Matrix assessment template", module: "quality" }
+    ],
+    upcomingEvents: [
+      { date: "2026-01-15 14:00 (EST)", title: "AI Predictive Analytics Sharing", desc: "AI applications in project risk prediction", meta: "Zoom Online", module: "tools" },
+      { date: "2026-01-28 15:00 (GMT)", title: "Compliance Trends Roundtable", desc: "2026 compliance trends expert roundtable", meta: "Zoom Meeting", module: "compliance" }
+    ]
+  },
+  2: {
+    latestUpdates: [],
+    upcomingEvents: [
+      { date: "2026-02-14", title: "Agile Valentine's Day", desc: "Agile community online exchange", meta: "Google Meet", module: "process" }
+    ]
+  },
+  3: {
+    latestUpdates: [
+      { date: "2026-03-08", title: "Quality Metrics Framework Released", desc: "Project Quality KPI framework version 1.0", module: "quality" }
+    ],
+    upcomingEvents: []
+  },
+  4: {
+    latestUpdates: [
+      { date: "2026-04-12", title: "Toolset Update", desc: "Asana vs Monday.com comparison review", module: "tools" }
+    ],
+    upcomingEvents: [
+      { date: "2026-04-20", title: "PM Certification Bootcamp", desc: "PMP exam preparation online training", meta: "Tencent Meeting", module: "process" }
+    ]
+  },
+  5: {
+    latestUpdates: [],
+    upcomingEvents: [
+      { date: "2026-05-15", title: "Agile China Summit", desc: "Annual Agile China Conference", meta: "Shanghai Offline", module: "process" }
+    ]
+  },
+  6: {
+    latestUpdates: [
+      { date: "2026-06-01", title: "SAFe 6.0 Guide", desc: "New 'SAFe 6.0 Implementation Guide' added to Process section", module: "process" },
+      { date: "2026-06-14", title: "Notion Template Update", desc: "Tools section updated with 'Notion Project Management Database Template'", module: "tools" },
+      { date: "2026-06-20", title: "Quality Gate Automation", desc: "Community blog 'Quality Gate Automation Practice'", module: "quality" }
+    ],
+    upcomingEvents: [
+      { date: "2026-06-08 All Day", title: "Annual Online Summit", desc: "DTIT Project Manager Collective Annual Summit", meta: "Theme: Resilient Project Leadership", module: "process" },
+      { date: "2026-06-22 20:00 (EST)", title: "Agile Estimation Workshop", desc: "Agile estimation and planning poker practice", meta: "Zoom Online", module: "process" }
+    ]
+  },
+  7: {
+    latestUpdates: [
+      { date: "2026-07-09", title: "Mid-Year Review Collection", desc: "2026 H1 Best Practices Case Collection", module: "process" }
+    ],
+    upcomingEvents: [
+      { date: "2026-07-18", title: "PM Salon", desc: "Women PM Leadership Salon", meta: "Beijing Offline + Online", module: "quality" }
+    ]
+  },
+  8: {
+    latestUpdates: [],
+    upcomingEvents: []
+  },
+  9: {
+    latestUpdates: [
+      { date: "2026-09-05", title: "Compliance Update", desc: "New CCPA compliance checklist document added", module: "compliance" }
+    ],
+    upcomingEvents: [
+      { date: "2026-09-20", title: "PMP Exam Reminder", desc: "Last PMP exam window for 2026", meta: "Global Exam Centers", module: "process" }
+    ]
+  },
+  10: {
+    latestUpdates: [
+      { date: "2026-10-15", title: "Risk Management Framework", desc: "New version of Project Risk Management Framework released", module: "quality" }
+    ],
+    upcomingEvents: [
+      { date: "2026-10-28", title: "PMI Global Conference", desc: "PMI Global Conference 2026", meta: "Online Live", module: "process" }
+    ]
+  },
+  11: {
+    latestUpdates: [],
+    upcomingEvents: [
+      { date: "2026-11-10", title: "Year-End Review Preparation", desc: "Project year-end review methods online lecture", meta: "Tencent Meeting", module: "process" }
+    ]
+  },
+  12: {
+    latestUpdates: [
+      { date: "2026-12-05", title: "Failure Case Analysis Collection", desc: "2026 Annual Project Failure Case Analysis Collection released", module: "quality" },
+      { date: "2026-12-18", title: "Cyber Resilience Act Impact", desc: "Compliance section added 'EU Cyber Resilience Act Impact on Projects'", module: "compliance" }
+    ],
+    upcomingEvents: [
+      { date: "2026-12-03 ~ 12-10", title: "Year-End PM Certification Week", desc: "PMP/PRINCE2 discounts", meta: "Global", module: "tools" },
+      { date: "2026-12-16 11:00 (CET)", title: "Retrospective Simulation", desc: "2027 planning sprint", meta: "Zoom Online", module: "process" }
+    ]
+  }
+};
+
+/* ====== Render Document Cards ====== */
+function renderDocs(category, containerId) {
+  const container = document.getElementById(containerId);
+  const docs = documentData[category];
+  container.innerHTML = docs.map(doc => `
+    <div class="doc-card" tabindex="0" role="link" aria-label="${doc.title}">
+      <div class="doc-card-title">${doc.title}</div>
+      <div class="doc-card-summary">${doc.summary}</div>
+      <a href="${doc.link}" class="doc-card-link" target="_blank" rel="noopener">查看详情</a>
+    </div>
+  `).join("");
+}
+
+/* ====== Tab Navigation ====== */
+function initTabs() {
+  const tabNav = document.getElementById('tabNav');
+  const tabContent = document.getElementById('tabContent');
+
+  tabNav.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+
+    const tabId = btn.dataset.tab;
+
+    tabNav.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    tabContent.querySelectorAll('.tab-panel').forEach(panel => {
+      panel.classList.remove('active');
+    });
+    document.getElementById(`panel-${tabId}`).classList.add('active');
+  });
+}
+
+/* ====== Render Year Calendar ====== */
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const currentMonth = new Date().getFullYear() === 2026 ? new Date().getMonth() + 1 : 6;
+let selectedMonth = currentMonth;
+
+function renderYearCalendar() {
+  const calendar = document.getElementById('yearCalendar');
+  calendar.innerHTML = monthNames.map((name, i) => {
+    const month = i + 1;
+    const isActive = month === selectedMonth;
+    const isCurrent = month === currentMonth;
+    let cls = 'cal-month';
+    if (isActive) cls += ' active';
+    if (isCurrent && !isActive) cls += ' current';
+    return `<div class="${cls}" data-month="${month}">${name}</div>`;
+  }).join('');
+
+  calendar.querySelectorAll('.cal-month').forEach(el => {
+    el.addEventListener('click', () => {
+      const month = parseInt(el.dataset.month);
+      selectMonth(month);
+    });
+  });
+}
+
+function selectMonth(month) {
+  selectedMonth = month;
+  document.querySelectorAll('.cal-month').forEach(el => {
+    const m = parseInt(el.dataset.month);
+    el.classList.toggle('active', m === month);
+  });
+  renderMonthData(month);
+}
+
+/* ====== Render Month Data ====== */
+function renderMonthData(month) {
+  const data = calendarData[month];
+  const updatesEl = document.getElementById('latestUpdates');
+  const eventsEl = document.getElementById('upcomingEvents');
+
+  if (data.latestUpdates.length === 0) {
+    updatesEl.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <div>No updates this month</div>
+      </div>`;
+  } else {
+    updatesEl.innerHTML = `<ul class="info-list">${data.latestUpdates.map((u, index) => {
+      const moduleClass = u.module ? `module-${u.module}` : '';
+      return `
+      <li class="info-item ${moduleClass}">
+        <div class="info-item-title">${u.title}</div>
+        <div class="info-item-desc">${u.desc}</div>
+        <button class="info-detail" onclick="openDetail('update', ${index}, ${month})">Details</button>
+      </li>
+    `;
+    }).join('')}</ul>`;
+  }
+
+  if (data.upcomingEvents.length === 0) {
+    eventsEl.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🎯</div>
+        <div>No events scheduled</div>
+      </div>`;
+  } else {
+    eventsEl.innerHTML = `<ul class="info-list">${data.upcomingEvents.map((e, index) => {
+      const moduleClass = e.module ? `module-${e.module}` : '';
+      return `
+      <li class="info-item ${moduleClass}">
+        <div class="info-item-title">${e.title}</div>
+        <div class="info-item-desc">${e.desc}</div>
+        ${e.meta ? `<div class="info-item-meta">📍 ${e.meta}</div>` : ''}
+        <button class="info-detail" onclick="openDetail('event', ${index}, ${month})">Details</button>
+      </li>
+    `;
+    }).join('')}</ul>`;
+  }
+}
+
+/* ====== Modal Functions ====== */
+function openDetail(type, index, month) {
+  const data = calendarData[month];
+  let item;
+  
+  if (type === 'update') {
+    item = data.latestUpdates[index];
+    item.type = 'update';
+    item.typeLabel = '更新';
+  } else {
+    item = data.upcomingEvents[index];
+    item.type = 'event';
+    item.typeLabel = '活动';
+  }
+  
+  if (!item) return;
+  
+  document.getElementById('modalTitle').textContent = item.title;
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-type">${item.type === 'update' ? '📝 更新' : '📅 活动'}</div>
+    <p>${item.desc}</p>
+    ${item.date ? `<div class="modal-date"><strong>日期：</strong>${item.date}</div>` : ''}
+    ${item.meta ? `<div class="modal-meta"><strong>地点/主题：</strong>${item.meta}</div>` : ''}
+    <div class="modal-type-label">类型：${item.typeLabel}</div>
+  `;
+  
+  document.getElementById('detailModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('detailModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+/* ====== Keyboard Navigation ====== */
+document.addEventListener('keydown', (e) => {
+  if (e.target.closest('.tab-nav')) {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const tabs = ['process', 'tools', 'quality', 'compliance'];
+      const currentIndex = tabs.indexOf(selectedTab());
+      const delta = e.key === 'ArrowRight' ? 1 : -1;
+      const newIndex = (currentIndex + delta + tabs.length) % tabs.length;
+      switchTab(tabs[newIndex]);
+    }
+  }
+});
+
+function selectedTab() {
+  return document.querySelector('.tab-btn.active')?.dataset.tab || 'process';
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tabId}`));
+}
+
+/* ====== Init ====== */
+document.addEventListener('DOMContentLoaded', () => {
+  renderDocs('process', 'docs-process');
+  renderDocs('tools', 'docs-tools');
+  renderDocs('quality', 'docs-quality');
+  renderDocs('compliance', 'docs-compliance');
+  initTabs();
+  renderYearCalendar();
+  selectMonth(selectedMonth);
+});
+</script>
+
+</body>
+</html>
